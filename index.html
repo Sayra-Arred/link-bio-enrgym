@@ -53,38 +53,215 @@
             overscroll-behavior-y: none;
         }
 
-        /* ===== TEXTURE OVERLAY ===== */
-        .texture-overlay {
+        /* ===== SPORT TEXTURE SYSTEM ===== */
+
+        /* Diagonal sport stripes - moving */
+        .texture-stripes {
             position: fixed;
             inset: 0;
             z-index: 1;
             pointer-events: none;
-            opacity: 0.4;
-            background-image:
-                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230a3d7a' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.06;
+            background: repeating-linear-gradient(
+                -45deg,
+                transparent,
+                transparent 40px,
+                rgba(0, 120, 255, 0.3) 40px,
+                rgba(0, 120, 255, 0.3) 42px,
+                transparent 42px,
+                transparent 80px,
+                rgba(0, 80, 200, 0.2) 80px,
+                rgba(0, 80, 200, 0.2) 81px
+            );
+            background-size: 200% 200%;
+            animation: stripes-move 20s linear infinite;
         }
 
+        @keyframes stripes-move {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 200% 200%; }
+        }
+
+        /* Hex/carbon fiber pattern */
+        .texture-carbon {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.12;
+            background-image:
+                url("data:image/svg+xml,%3Csvg width='28' height='49' viewBox='0 0 28 49' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%230055cc' fill-opacity='0.15'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        /* Animated noise grain */
         .texture-noise {
             position: fixed;
             inset: 0;
             z-index: 1;
             pointer-events: none;
-            opacity: 0.035;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
             background-repeat: repeat;
             background-size: 256px 256px;
+            animation: noise-shift 0.5s steps(3) infinite;
         }
 
-        .texture-grid {
+        @keyframes noise-shift {
+            0% { transform: translate(0, 0); }
+            33% { transform: translate(-2px, 1px); }
+            66% { transform: translate(1px, -2px); }
+            100% { transform: translate(0, 0); }
+        }
+
+        /* Moving geometric triangles */
+        .texture-geo {
             position: fixed;
             inset: 0;
             z-index: 1;
             pointer-events: none;
-            opacity: 0.03;
-            background-image:
-                linear-gradient(rgba(0, 150, 255, 0.3) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 150, 255, 0.3) 1px, transparent 1px);
-            background-size: 40px 40px;
+            overflow: hidden;
+        }
+
+        .texture-geo .shape {
+            position: absolute;
+            border: 1px solid rgba(0, 150, 255, 0.08);
+            animation: geo-float 15s ease-in-out infinite;
+        }
+
+        .texture-geo .shape:nth-child(1) {
+            width: min(300px, 70vw);
+            height: min(300px, 70vw);
+            border-radius: 0;
+            transform: rotate(45deg);
+            top: 8%;
+            right: -5%;
+            animation-duration: 18s;
+            border-color: rgba(0, 100, 255, 0.06);
+        }
+
+        .texture-geo .shape:nth-child(2) {
+            width: min(200px, 50vw);
+            height: min(200px, 50vw);
+            border-radius: 0;
+            transform: rotate(30deg);
+            bottom: 15%;
+            left: -3%;
+            animation-duration: 22s;
+            animation-delay: -5s;
+            border-color: rgba(0, 180, 255, 0.05);
+        }
+
+        .texture-geo .shape:nth-child(3) {
+            width: min(150px, 35vw);
+            height: min(150px, 35vw);
+            border-radius: 50%;
+            top: 40%;
+            right: 10%;
+            animation-duration: 16s;
+            animation-delay: -8s;
+            border-color: rgba(0, 200, 255, 0.04);
+        }
+
+        .texture-geo .shape:nth-child(4) {
+            width: 0;
+            height: 0;
+            border-left: min(80px, 18vw) solid transparent;
+            border-right: min(80px, 18vw) solid transparent;
+            border-bottom: min(140px, 30vw) solid rgba(0, 120, 255, 0.03);
+            top: 60%;
+            left: 15%;
+            animation-duration: 20s;
+            animation-delay: -3s;
+            border-top: none;
+        }
+
+        .texture-geo .shape:nth-child(5) {
+            width: 0;
+            height: 0;
+            border-left: min(60px, 14vw) solid transparent;
+            border-right: min(60px, 14vw) solid transparent;
+            border-bottom: min(100px, 24vw) solid rgba(0, 80, 255, 0.025);
+            top: 10%;
+            left: 30%;
+            animation-duration: 25s;
+            animation-delay: -10s;
+            border-top: none;
+        }
+
+        @keyframes geo-float {
+            0%, 100% { transform: rotate(var(--rot, 45deg)) translate(0, 0); opacity: 0.6; }
+            25% { transform: rotate(var(--rot, 45deg)) translate(10px, -15px); opacity: 1; }
+            50% { transform: rotate(var(--rot, 45deg)) translate(-8px, 8px); opacity: 0.4; }
+            75% { transform: rotate(var(--rot, 45deg)) translate(12px, 12px); opacity: 0.8; }
+        }
+
+        /* Speed lines - vertical streaks */
+        .texture-speed {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .texture-speed .streak {
+            position: absolute;
+            width: 1px;
+            background: linear-gradient(180deg, transparent, rgba(0, 150, 255, 0.2), transparent);
+            animation: speed-fall linear infinite;
+        }
+
+        .texture-speed .streak:nth-child(1) { left: 10%; height: 15vh; animation-duration: 4s; animation-delay: 0s; }
+        .texture-speed .streak:nth-child(2) { left: 25%; height: 10vh; animation-duration: 3.5s; animation-delay: -1s; opacity: 0.5; }
+        .texture-speed .streak:nth-child(3) { left: 50%; height: 20vh; animation-duration: 5s; animation-delay: -2s; opacity: 0.3; }
+        .texture-speed .streak:nth-child(4) { left: 70%; height: 12vh; animation-duration: 3s; animation-delay: -0.5s; opacity: 0.4; }
+        .texture-speed .streak:nth-child(5) { left: 85%; height: 18vh; animation-duration: 4.5s; animation-delay: -3s; opacity: 0.25; }
+        .texture-speed .streak:nth-child(6) { left: 40%; height: 8vh; animation-duration: 3.2s; animation-delay: -1.8s; opacity: 0.35; }
+
+        @keyframes speed-fall {
+            0% { top: -20vh; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { top: 120vh; opacity: 0; }
+        }
+
+        /* Pulse rings */
+        .texture-pulse {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .texture-pulse .ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(0, 150, 255, 0.08);
+            animation: ring-expand 6s ease-out infinite;
+        }
+
+        .texture-pulse .ring:nth-child(1) {
+            top: 20%;
+            left: 20%;
+            animation-delay: 0s;
+        }
+
+        .texture-pulse .ring:nth-child(2) {
+            top: 60%;
+            right: 15%;
+            animation-delay: -2s;
+        }
+
+        .texture-pulse .ring:nth-child(3) {
+            bottom: 20%;
+            left: 40%;
+            animation-delay: -4s;
+        }
+
+        @keyframes ring-expand {
+            0% { width: 0; height: 0; opacity: 0.6; transform: translate(-50%, -50%); }
+            100% { width: min(400px, 90vw); height: min(400px, 90vw); opacity: 0; transform: translate(-50%, -50%); }
         }
 
         /* ===== VIDEO BACKGROUND ===== */
@@ -1359,10 +1536,30 @@
         <div class="video-placeholder"></div>
     </div>
 
-    <!-- Textures -->
-    <div class="texture-overlay"></div>
+    <!-- Sport Textures -->
+    <div class="texture-stripes"></div>
+    <div class="texture-carbon"></div>
     <div class="texture-noise"></div>
-    <div class="texture-grid"></div>
+    <div class="texture-geo">
+        <div class="shape" style="--rot:45deg"></div>
+        <div class="shape" style="--rot:30deg"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    <div class="texture-speed">
+        <div class="streak"></div>
+        <div class="streak"></div>
+        <div class="streak"></div>
+        <div class="streak"></div>
+        <div class="streak"></div>
+        <div class="streak"></div>
+    </div>
+    <div class="texture-pulse">
+        <div class="ring"></div>
+        <div class="ring"></div>
+        <div class="ring"></div>
+    </div>
 
     <!-- Gradient Orbs -->
     <div class="gradient-mesh">
