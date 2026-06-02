@@ -553,6 +553,166 @@
         @media(prefers-reduced-motion:reduce) {
             *, *::before, *::after { animation-duration:.01ms !important; transition-duration:.01ms !important; }
         }
+
+        /* ========== PROMO BANNER ========== */
+        .promo-banner {
+            position:relative; border-radius:16px; overflow:hidden;
+            background:linear-gradient(135deg,rgba(0,60,180,.2),rgba(0,200,255,.08));
+            border:1px solid rgba(var(--cyan-rgb),.2);
+            padding:clamp(20px,5vw,28px); text-align:center;
+            backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+        }
+
+        .promo-banner::before {
+            content:''; position:absolute; inset:0;
+            background:linear-gradient(135deg,rgba(var(--cyan-rgb),.06),transparent 50%);
+        }
+
+        .promo-banner::after {
+            content:''; position:absolute; top:0; left:0; right:0; height:2px;
+            background:linear-gradient(90deg,transparent,var(--cyan),var(--blue),transparent);
+        }
+
+        .promo-shimmer {
+            position:absolute; inset:0; overflow:hidden; pointer-events:none;
+        }
+        .promo-shimmer::before {
+            content:''; position:absolute; top:0; left:-100%; width:60%; height:100%;
+            background:linear-gradient(90deg,transparent,rgba(255,255,255,.03),transparent);
+            animation:shimmer 4s ease-in-out infinite;
+        }
+        @keyframes shimmer { 0%{left:-100%} 50%,100%{left:200%} }
+
+        .promo-badge {
+            display:inline-block; padding:4px 14px; border-radius:50px;
+            font-size:clamp(9px,2.3vw,10px); font-weight:800;
+            text-transform:uppercase; letter-spacing:2px;
+            background:linear-gradient(135deg,var(--blue),var(--deep));
+            color:#fff; margin-bottom:12px; position:relative;
+            box-shadow:0 0 20px rgba(var(--blue-rgb),.3);
+            animation:badge-glow 2s ease-in-out infinite;
+        }
+        @keyframes badge-glow { 0%,100%{box-shadow:0 0 20px rgba(var(--blue-rgb),.3)} 50%{box-shadow:0 0 30px rgba(var(--blue-rgb),.5)} }
+
+        .promo-title {
+            font-family:'Bebas Neue',sans-serif;
+            font-size:clamp(22px,5.5vw,30px); letter-spacing:3px; line-height:1.1;
+            margin-bottom:4px; position:relative;
+        }
+
+        .promo-subtitle {
+            font-size:clamp(11px,2.8vw,13px); color:rgba(255,255,255,.4);
+            margin-bottom:clamp(16px,4vw,22px); position:relative;
+        }
+
+        .promo-price-hero {
+            position:relative; margin-bottom:clamp(8px,2vw,12px);
+        }
+
+        .promo-price-amount {
+            font-family:'Bebas Neue',sans-serif;
+            font-size:clamp(48px,12vw,64px); line-height:1;
+            background:linear-gradient(135deg,#fff,var(--cyan));
+            -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+            text-shadow:none;
+        }
+
+        .promo-price-period {
+            font-size:clamp(12px,3vw,14px); color:rgba(var(--cyan-rgb),.5);
+            font-weight:600; text-transform:uppercase; letter-spacing:2px;
+        }
+
+        .promo-includes {
+            display:flex; flex-direction:column; gap:8px;
+            margin:clamp(14px,3.5vw,20px) 0; position:relative;
+        }
+
+        .promo-item {
+            display:flex; align-items:center; gap:10px;
+            padding:10px 14px; border-radius:10px;
+            background:rgba(var(--neon-rgb),.03); border:1px solid rgba(var(--neon-rgb),.06);
+            text-align:left;
+        }
+
+        .promo-item-icon {
+            width:28px; height:28px; border-radius:8px; flex-shrink:0;
+            display:flex; align-items:center; justify-content:center;
+            background:rgba(var(--cyan-rgb),.1); color:var(--cyan); font-size:14px;
+        }
+
+        .promo-item-text {
+            font-size:clamp(12px,3vw,13px); font-weight:600; color:rgba(255,255,255,.7);
+        }
+
+        .promo-valid {
+            font-size:clamp(9px,2.3vw,10px); color:rgba(255,100,100,.6);
+            font-weight:700; text-transform:uppercase; letter-spacing:1px;
+            margin-top:clamp(12px,3vw,16px); position:relative;
+            line-height:1.5;
+        }
+
+        .promo-valid strong { color:rgba(255,130,130,.8); }
+
+        .promo-location-tag {
+            display:inline-flex; align-items:center; gap:4px;
+            padding:3px 10px; border-radius:50px; margin-top:6px;
+            font-size:clamp(9px,2.3vw,10px); font-weight:700;
+            background:rgba(var(--cyan-rgb),.08); border:1px solid rgba(var(--cyan-rgb),.15);
+            color:rgba(var(--cyan-rgb),.7); letter-spacing:1px;
+        }
+        .promo-location-tag svg { width:10px; height:10px; }
+
+        .promo-cta {
+            display:inline-flex; align-items:center; gap:8px;
+            padding:clamp(12px,3vw,14px) clamp(24px,6vw,36px);
+            border-radius:50px; font-size:clamp(12px,3vw,14px); font-weight:700;
+            text-transform:uppercase; letter-spacing:2px; text-decoration:none;
+            background:linear-gradient(135deg,var(--blue),var(--deep));
+            color:#fff; border:none; cursor:pointer; margin-top:clamp(14px,3.5vw,20px);
+            box-shadow:0 4px 20px rgba(var(--blue-rgb),.3);
+            transition:all .3s; position:relative; overflow:hidden;
+        }
+        .promo-cta:active { transform:scale(.96); }
+        @media(hover:hover){ .promo-cta:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(var(--blue-rgb),.4); } }
+
+        /* Prices grid */
+        .prices-grid {
+            display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(8px,2vw,12px);
+            margin-top:clamp(14px,3.5vw,20px); position:relative;
+        }
+
+        .price-card {
+            padding:clamp(14px,3.5vw,20px) clamp(8px,2vw,12px);
+            border-radius:12px; text-align:center;
+            background:rgba(var(--neon-rgb),.03); border:1px solid rgba(var(--neon-rgb),.08);
+        }
+
+        .price-card-label {
+            font-size:clamp(9px,2.3vw,10px); font-weight:700;
+            text-transform:uppercase; letter-spacing:1px;
+            color:rgba(255,255,255,.35); margin-bottom:6px;
+        }
+
+        .price-card-amount {
+            font-family:'Bebas Neue',sans-serif;
+            font-size:clamp(26px,6.5vw,34px); line-height:1;
+            color:var(--cyan); text-shadow:0 0 15px rgba(var(--cyan-rgb),.2);
+        }
+
+        .price-card-period {
+            font-size:clamp(8px,2vw,9px); color:rgba(255,255,255,.25);
+            text-transform:uppercase; letter-spacing:1px; margin-top:2px;
+        }
+
+        .prices-note {
+            font-size:clamp(9px,2.3vw,10px); color:rgba(255,255,255,.25);
+            text-align:center; margin-top:10px; position:relative;
+        }
+
+        @media(max-width:360px) {
+            .prices-grid { grid-template-columns:1fr; gap:8px; }
+            .promo-price-amount { font-size:42px; }
+        }
     </style>
 </head>
 <body>
@@ -581,7 +741,7 @@
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
         <span class="nav-tooltip">Facebook</span>
     </a>
-    <a href="https://wa.me/521XXXXXXXXXX?text=Hola%20ENRGYM%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n" target="_blank" rel="noopener" class="nav-btn" aria-label="WhatsApp">
+    <a href="https://wa.me/5217721183156?text=Hola%20ENRGYM%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n" target="_blank" rel="noopener" class="nav-btn" aria-label="WhatsApp">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         <span class="nav-tooltip">WhatsApp</span>
     </a>
@@ -615,8 +775,71 @@
         <p class="hero-headline">Transforma tu cuerpo.<br>Supera tus límites.</p>
         <p class="hero-sub">Entrenamiento, comunidad y resultados reales en Hidalgo.</p>
         <div class="hero-ctas">
-            <a href="https://wa.me/521XXXXXXXXXX?text=Hola%20ENRGYM%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n" target="_blank" rel="noopener" class="cta-primary"><span>Más información</span></a>
+            <a href="https://wa.me/5217721183156?text=Hola%20ENRGYM%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n" target="_blank" rel="noopener" class="cta-primary"><span>Más información</span></a>
         </div>
+    </section>
+
+    <!-- PROMO INAUGURACIÓN -->
+    <section class="section reveal">
+        <div class="promo-banner">
+            <div class="promo-shimmer"></div>
+            <div class="promo-badge">Precio especial por inauguración</div>
+            <div class="promo-title">KIT SOCIO FUNDADOR</div>
+            <div class="promo-subtitle">Únete a la familia ENRGYM con una oferta irrepetible</div>
+
+            <div class="promo-price-hero">
+                <div class="promo-price-amount">$2,500</div>
+                <div class="promo-price-period">Anualidad congelada</div>
+            </div>
+
+            <div class="promo-includes">
+                <div class="promo-item">
+                    <div class="promo-item-icon">★</div>
+                    <div class="promo-item-text">Kit Socio Fundador incluido</div>
+                </div>
+                <div class="promo-item">
+                    <div class="promo-item-icon">▶</div>
+                    <div class="promo-item-text">3 meses de asesoramiento deportivo profesional</div>
+                </div>
+                <div class="promo-item">
+                    <div class="promo-item-icon">∞</div>
+                    <div class="promo-item-text">Anualidad congelada (sin incrementos)</div>
+                </div>
+            </div>
+
+            <div class="promo-valid">
+                <strong>Válido hasta el 7 de junio de 2026 o hasta agotar existencias.</strong>
+            </div>
+            <div style="text-align:center">
+                <span class="promo-location-tag">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Válido únicamente en sucursal Tlahuelilpan
+                </span>
+            </div>
+
+            <a href="https://wa.me/5217721183156?text=Hola%20ENRGYM%2C%20quiero%20el%20Kit%20Socio%20Fundador%20Tlahuelilpan" target="_blank" rel="noopener" class="promo-cta">Apartar mi lugar</a>
+        </div>
+
+        <!-- Precios regulares ambas sucursales -->
+        <div class="section-label" style="margin-top:clamp(20px,5vw,30px)"><div class="line"></div><span>Precios</span><div class="line"></div></div>
+        <div class="prices-grid">
+            <div class="price-card">
+                <div class="price-card-label">Mensualidad</div>
+                <div class="price-card-amount">$400</div>
+                <div class="price-card-period">por mes</div>
+            </div>
+            <div class="price-card">
+                <div class="price-card-label">Visita</div>
+                <div class="price-card-amount">$50</div>
+                <div class="price-card-period">por día</div>
+            </div>
+            <div class="price-card">
+                <div class="price-card-label">Anualidad</div>
+                <div class="price-card-amount">$4,200</div>
+                <div class="price-card-period">por año</div>
+            </div>
+        </div>
+        <p class="prices-note">Precios válidos en ambas sucursales</p>
     </section>
 
     <!-- STATS -->
@@ -675,7 +898,7 @@
     <!-- WHATSAPP -->
     <section class="section reveal">
         <div class="section-label"><div class="line"></div><span>Contacto Directo</span><div class="line"></div></div>
-        <a href="https://wa.me/521XXXXXXXXXX?text=Hola%20ENRGYM%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n" target="_blank" rel="noopener" class="card card-wa">
+        <a href="https://wa.me/5217721183156?text=Hola%20ENRGYM%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n" target="_blank" rel="noopener" class="card card-wa">
             <div class="wa-pulse"></div>
             <div class="card-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
             <div class="card-body">
